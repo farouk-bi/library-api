@@ -48,4 +48,12 @@ class LibraryApplicationTests {
         assertThat(send("POST", "/api/books/3/return").statusCode()).isEqualTo(200);
         assertThat(send("POST", "/api/books/999/borrow").statusCode()).isEqualTo(404);
     }
+    @Test
+    void securityHeadersArePresent() throws Exception {
+        HttpResponse<String> response = send("GET", "/");
+
+        assertThat(response.headers().firstValue("X-Content-Type-Options")).hasValue("nosniff");
+        assertThat(response.headers().firstValue("X-Frame-Options")).hasValue("DENY");
+        assertThat(response.headers().firstValue("Content-Security-Policy")).isPresent();
+    }
 }
