@@ -23,9 +23,10 @@ public class SecurityHeadersFilter extends OncePerRequestFilter {
         response.setHeader("X-Content-Type-Options", "nosniff");
         // Interdit l'affichage de l'application dans une iframe (clickjacking)
         response.setHeader("X-Frame-Options", "DENY");
-        // Seules les ressources du site lui-meme sont autorisees (limite le XSS)
+        // Seules les ressources du site lui-meme sont autorisees (limite le XSS).
+        // base-uri n'a pas de valeur par defaut via default-src : il faut le definir (alerte ZAP 10055)
         response.setHeader("Content-Security-Policy",
-                "default-src 'self'; frame-ancestors 'none'; form-action 'self'");
+                "default-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'");
         // Ne transmet pas l'URL d'origine aux autres sites
         response.setHeader("Referrer-Policy", "no-referrer");
         // Desactive les API sensibles du navigateur

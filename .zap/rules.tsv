@@ -1,1 +1,7 @@
-# A completer - guide : etape 5 (OWASP ZAP) - alertes acceptees et justifiees
+$t = "`t"
+@(
+  "# Alertes ZAP acceptees apres analyse - colonnes separees par des tabulations",
+  "10049${t}IGNORE${t}(Non-Storable Content) reponses volontairement non mises en cache (Cache-Control no-store) - risque nul - accepte le 25/11/2026"
+) | Set-Content -Path .zap\rules.tsv -Encoding ascii
+
+(Get-Content .zap\rules.tsv)[1] -split "`t"
