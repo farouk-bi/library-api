@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /** Logique metier : catalogue en memoire, emprunt et retour. */
 @Service
 public class BookService {
-    private static final String GITHUB_TOKEN = "ghp_1234567890abcdef1234567890abcdef1234";
+
     private final Map<Long, Book> books = new ConcurrentHashMap<>();
 
     public BookService() {
