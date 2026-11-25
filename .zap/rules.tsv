@@ -1,3 +1,4 @@
+New-Item -ItemType Directory -Force .zap | Out-Null
 $t = "`t"
 @(
   "# Alertes ZAP acceptees apres analyse - colonnes separees par des tabulations",
