@@ -13,11 +13,36 @@ env:
 
 jobs:
   # ---------------------------------------------------------------
+  # 1. Gitleaks : recherche de secrets (TP2)
+  # ---------------------------------------------------------------
+  gitleaks:
+    name: 1. Gitleaks - secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository (historique complet)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Gitleaks report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gitleaks-report
+          path: results.sarif
+          if-no-files-found: ignore    
+  # ---------------------------------------------------------------
   # 3. Build Maven + tests unitaires (TP1)
   # ---------------------------------------------------------------
   build:
     name: 3. Build Maven + tests
     runs-on: ubuntu-latest
+    needs: gitleaks
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
