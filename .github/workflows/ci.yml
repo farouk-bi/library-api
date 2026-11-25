@@ -259,7 +259,7 @@ jobs:
   push:
     name: 8. Push Docker Hub
     runs-on: ubuntu-latest
-    needs: [sonarcloud, trivy]
+    needs: [dependency-scan,sonarcloud, trivy]
     if: github.event_name == 'push'
     env:
       IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/library-api
