@@ -1,1 +1,40 @@
-# A completer - pipeline CI/CD (guide : etapes 1 a 5)
+name: CI/CD DevSecOps - library-api
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+# Nom local de l'image, transmis entre les jobs (sans le nom Docker Hub, qui est un secret)
+env:
+  IMAGE_LOCAL: library-api:ci
+
+jobs:
+  # ---------------------------------------------------------------
+  # 3. Build Maven + tests unitaires (TP1)
+  # ---------------------------------------------------------------
+  build:
+    name: 3. Build Maven + tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build Java project with Maven
+        run: mvn -B clean package
+
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-jar
+          path: target/library-api.jar
+          retention-days: 1
