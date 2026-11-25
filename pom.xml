@@ -28,7 +28,15 @@
             <artifactId>spring-boot-starter-webmvc</artifactId>
         </dependency>
 
-        <!-- TP4 : ajouter ici les dependances de supervision (voir guide) -->
+                <!-- Supervision (TP4) : Actuator + export Prometheus -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
 
         <!-- Tests (JUnit 5 + AssertJ) -->
         <dependency>

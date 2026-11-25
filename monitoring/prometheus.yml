@@ -1,1 +1,9 @@
-# A completer - guide : etape 4 (TP4 - Prometheus)
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'library-api'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      # L'application tourne sur le PC (mvn spring-boot:run), Prometheus dans Docker
+      - targets: ['host.docker.internal:8080']
