@@ -1,5 +1,5 @@
 # Image de base : JRE seulement (pas de JDK), Alpine, version epinglee -> petite surface d'attaque
-FROM eclipse-temurin:21.0.1_12-jre-alpine
+FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 
