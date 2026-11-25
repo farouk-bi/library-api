@@ -1,0 +1,15 @@
+target/
+*.class
+*.log
+.idea/
+*.iml
+.vscode/
+.DS_Store
+# Rapports generes en local
+results.sarif
+*-report.txt
+*.cyclonedx.json
+image.tar
+report_*.html
+report_*.json
+report_*.md
